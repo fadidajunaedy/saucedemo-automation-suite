@@ -4,11 +4,13 @@ export class InventoryPage {
   readonly page: Page;
   readonly cartBadge: Locator;
   readonly cartButton: Locator;
+  readonly itemSortContainer: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.cartBadge = page.locator('.shopping_cart_badge');
     this.cartButton = page.locator('.shopping_cart_link');
+    this.itemSortContainer = page.locator('.product_sort_container')
   }
 
   async addItemToCart(itemName: string) {
@@ -18,7 +20,7 @@ export class InventoryPage {
     click();
   }
 
-  async clickItem(itemName: string) {
+  async goToDetailItem(itemName: string) {
     await this.page.locator('.inventory_item')
     .filter({ hasText: itemName })
     .locator('.inventory_item_name')

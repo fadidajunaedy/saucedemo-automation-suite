@@ -20,7 +20,7 @@ test('User should be able to add item to cart', async({ page }) => {
 
 test('User should be able to click item', async({ page }) => {
   const inventoryPage = new InventoryPage(page);
-  await inventoryPage.clickItem("Sauce Labs Backpack");
+  await inventoryPage.goToDetailItem("Sauce Labs Backpack");
 
   await expect(page).toHaveURL(/.*inventory-item.html/);
   await expect(page.locator('.inventory_details_name')).toHaveText("Sauce Labs Backpack");
