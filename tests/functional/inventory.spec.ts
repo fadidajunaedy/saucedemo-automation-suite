@@ -26,6 +26,18 @@ test('User should be able to click item', async({ page }) => {
   await expect(page.locator('.inventory_details_name')).toHaveText("Sauce Labs Backpack");
 });
 
-test('User should be able to sorting item', async({ page }) => {
+test('User should be able to sort items by Name (A to Z)', async ({ page }) => {
 
-})
+});
+
+test('User should be able to sort items by Name (Z to A)', async ({ page }) => {
+
+});
+
+test('User should be able to sort items by Price (low to high)', async ({ page }) => {
+
+});
+
+test('User should be able to sort items by Price (high to low)', async ({ page }) => {
+
+});
