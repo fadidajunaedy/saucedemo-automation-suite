@@ -18,6 +18,16 @@ test('User should be able to add item to cart', async({ page }) => {
   await expect(inventoryPage.cartBadge).toHaveText('1');
 });
 
+test('User should be able to remove item from cart', async({ page }) => {
+  const inventoryPage = new InventoryPage(page);
+
+  await inventoryPage.addItemToCart("Sauce Labs Backpack");
+  await expect(inventoryPage.cartBadge).toHaveText('1');
+
+  await inventoryPage.removeItemFromCart("Sauce Labs Backpack");
+  await expect(inventoryPage.cartBadge).toBeHidden();
+});
+
 test('User should be able to click item', async({ page }) => {
   const inventoryPage = new InventoryPage(page);
 
@@ -60,7 +70,7 @@ test('User should be able to sort items by Price (low to high)', async ({ page }
 test('User should be able to sort items by Price (high to low)', async ({ page }) => {
   const inventoryPage = new InventoryPage(page);
   const initialOrderItem: string[] = await page.locator('.inventory_item_price').allTextContents();
-  const highToLowOrderItem: number[] = [...initialOrderItem].map(price => parseFloat(price.replace('$', ''))).sort((a, b) => a - b).reverse();
+  const highToLowOrderItem: number[] = [...initialOrderItem].map(price => parseFloat(price.replace('$', ''))).sort((a, b) => b - a);
 
   await inventoryPage.sortItems('hilo');
   const orderAfterSorted = await page.locator('.inventory_item_price').allTextContents();
