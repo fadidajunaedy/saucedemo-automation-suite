@@ -24,6 +24,13 @@ export class InventoryPage {
     click();
   }
 
+  async removeItemFromCart(itemName: string) {
+    await this.page.locator('.inventory_item')
+    .filter({ hasText: itemName })
+    .getByRole('button', { name: 'Remove' }).
+    click();
+  }
+
   async goToDetailItem(itemName: string) {
     await this.page.locator('.inventory_item')
     .filter({ hasText: itemName })
