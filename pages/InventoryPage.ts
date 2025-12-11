@@ -10,7 +10,11 @@ export class InventoryPage {
     this.page = page;
     this.cartBadge = page.locator('.shopping_cart_badge');
     this.cartButton = page.locator('.shopping_cart_link');
-    this.itemSortContainer = page.locator('.product_sort_container')
+    this.itemSortContainer = page.locator('.product_sort_container');
+  }
+
+  async sortItems(sortOrder: 'az' | 'za' | 'lohi' | 'hilo') {
+    await this.itemSortContainer.selectOption(sortOrder);
   }
 
   async addItemToCart(itemName: string) {
