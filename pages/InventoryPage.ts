@@ -1,15 +1,14 @@
 import { type Locator, type Page } from "@playwright/test";
+import { Navbar } from "./components/Navbar";
 
 export class InventoryPage {
   readonly page: Page;
-  readonly cartBadge: Locator;
-  readonly cartButton: Locator;
+  readonly navbar: Navbar;
   readonly itemSortContainer: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.cartBadge = page.locator('.shopping_cart_badge');
-    this.cartButton = page.locator('.shopping_cart_link');
+    this.navbar = new Navbar(page);
     this.itemSortContainer = page.locator('.product_sort_container');
   }
 
@@ -36,9 +35,5 @@ export class InventoryPage {
     .filter({ hasText: itemName })
     .locator('.inventory_item_name')
     .click();
-  }
-
-  async goToCart() {
-    await this.cartButton.click();
   }
 }

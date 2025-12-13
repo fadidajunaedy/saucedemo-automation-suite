@@ -15,17 +15,17 @@ test('User should be able to add item to cart', async({ page }) => {
   const inventoryPage = new InventoryPage(page);
 
   await inventoryPage.addItemToCart("Sauce Labs Backpack");
-  await expect(inventoryPage.cartBadge).toHaveText('1');
+  await expect(inventoryPage.navbar.cartBadge).toHaveText('1');
 });
 
 test('User should be able to remove item from cart', async({ page }) => {
   const inventoryPage = new InventoryPage(page);
 
   await inventoryPage.addItemToCart("Sauce Labs Backpack");
-  await expect(inventoryPage.cartBadge).toHaveText('1');
+  await expect(inventoryPage.navbar.cartBadge).toHaveText('1');
 
   await inventoryPage.removeItemFromCart("Sauce Labs Backpack");
-  await expect(inventoryPage.cartBadge).toBeHidden();
+  await expect(inventoryPage.navbar.cartBadge).toBeHidden();
 });
 
 test('User should be able to click item', async({ page }) => {
@@ -76,4 +76,13 @@ test('User should be able to sort items by Price (high to low)', async ({ page }
   const orderAfterSorted = await page.locator('.inventory_item_price').allTextContents();
   const parsedOrderAfterSorted = [...orderAfterSorted].map(price => parseFloat(price.replace('$', '')));
   expect(parsedOrderAfterSorted).toEqual(highToLowOrderItem);
+});
+
+test('User should be able to see detail item from inventory page', async ({ page }) => {
+  const inventoryPage = new InventoryPage(page);
+  const itemName = 'Sauce Labs Backpack';
+  await inventoryPage.goToDetailItem(itemName);
+
+  await expect(page).toHaveURL(/.*inventory-item.html/);
+  await expect(page.locator('.inventory_details_name')).toHaveText(itemName);
 });
