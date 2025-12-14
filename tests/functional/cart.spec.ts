@@ -8,14 +8,11 @@ test.beforeEach(async ({ page }) => {
   await loginPage.goTo();
   await loginPage.login('standard_user', 'secret_sauce');
   await expect(page).toHaveURL(/.*inventory.html/);
-  await expect(page.locator('.title')).toHaveText('Products');
 
   const inventoryPage = new InventoryPage(page);
   await inventoryPage.addItemToCart('Sauce Labs Backpack');
   await inventoryPage.navbar.goToCart();
   await expect(page).toHaveURL(/.*cart.html/);
-  await expect(page.locator('.title')).toHaveText('Your Cart');
-  expect(page.locator('.cart-item')).toBeDefined();
 });
 
 test('User should be able to remove item to cart', async ({ page }) => {

@@ -11,9 +11,13 @@ export class InventoryItemPage {
   constructor(page: Page) {
     this.page = page;
     this.navbar = new Navbar(page);
-    this.backButton = page.locator('.inventory_details_back_button');
+    this.backButton = page.locator('#back-to-products');
     this.addToCartButton = page.locator('#add-to-cart');
     this.removeFromCartButton = page.locator('#remove');
+  }
+
+  async backToInventory() {
+    await this.backButton.click();
   }
 
   async addItemToCart() {

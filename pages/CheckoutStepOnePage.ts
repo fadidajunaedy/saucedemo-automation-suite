@@ -17,6 +17,22 @@ export class CheckoutStepOnePage {
     this.continueButton = page.locator('#continue');
   }
 
+  async enterFirstName(firstName: string) {
+    await this.firstNameInput.fill(firstName);
+  }
+
+  async enterLastName(lastName: string) {
+    await this.lastNameInput.fill(lastName);
+  }
+
+  async enterPostalCode(postalCode: string) {
+    await this.postalCodeInput.fill(postalCode);
+  }
+
+  async clickingContinueButton () {
+    await this.continueButton.click();
+  }
+
   async cancelCheckout() {
     await this.cancelButton.click();
   }

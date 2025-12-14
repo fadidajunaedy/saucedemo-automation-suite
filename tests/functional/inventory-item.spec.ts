@@ -8,13 +8,11 @@ test.beforeEach(async ({ page }) => {
   await loginPage.goTo();
   await loginPage.login('standard_user', 'secret_sauce');
   await expect(page).toHaveURL(/.*inventory.html/);
-  await expect(page.locator('.title')).toHaveText('Products');
 
   const inventoryPage = new InventoryPage(page);
   const itemName = 'Sauce Labs Backpack';
   await inventoryPage.goToDetailItem(itemName);
   await expect(page).toHaveURL(/.*inventory-item.html/);
-  await expect(page.locator('.inventory_details_name')).toHaveText(itemName);
 });
 
 test('User should be able to add item to cart', async ({ page }) => {

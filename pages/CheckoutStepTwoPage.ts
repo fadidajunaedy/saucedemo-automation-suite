@@ -19,19 +19,19 @@ export class CheckoutStepTwoPage {
 
   async getSubTotal(): Promise<number> {
     const rawText = await this.subTotalLabel.textContent() ||  '';
-    const cleanText = rawText.replace('$', '');
+    const cleanText = rawText.replace(/[^0-9.]/g, '');
     return parseFloat(cleanText)
   }
 
   async getTax(): Promise<number> {
     const rawText = await this.taxLabel.textContent() ||  '';
-    const cleanText = rawText.replace('$', '');
+    const cleanText = rawText.replace(/[^0-9.]/g, '');
     return parseFloat(cleanText)
   }
 
   async getTotal(): Promise<number> {
     const rawText = await this.totalLabel.textContent() ||  '';
-    const cleanText = rawText.replace('$', '');
+    const cleanText = rawText.replace(/[^0-9.]/g, '');
     return parseFloat(cleanText)
   }
 
