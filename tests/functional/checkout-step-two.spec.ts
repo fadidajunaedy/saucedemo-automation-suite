@@ -17,6 +17,7 @@ test.beforeEach(async ({ page }) => {
   await inventoryPage.navbar.goToCart();
   await expect(page).toHaveURL(/.*cart.html/);
   await expect(page.locator('.title')).toHaveText('Your Cart');
+  expect(page.locator('.cart-item')).toBeDefined();
 
   const cartPage = new CartPage(page);
   await cartPage.proceedToCheckout();
@@ -42,7 +43,6 @@ test('User should be able to finish to checkout', async ({ page }) => {
   const subTotal = await checkoutStepTwoPage.getSubTotal();
   const tax = await checkoutStepTwoPage.getTax();
   const total = await checkoutStepTwoPage.getTotal();
-
   expect(subTotal + tax).toEqual(total);
 
   await checkoutStepTwoPage.finishCheckout();
