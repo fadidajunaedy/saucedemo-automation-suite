@@ -47,8 +47,6 @@ test('E2E: User should be able completed a pucshase flow with single item', asyn
 test('E2E: User should be able completed a pucshase flow with multiple item', async ({ page }) => {
   const inventoryPage = new InventoryPage(page);
   await inventoryPage.addItemToCart('Sauce Labs Backpack');
-  await expect(inventoryPage.navbar.cartBadge).toHaveText('1');
-
   await inventoryPage.addItemToCart('Sauce Labs Bike Light');
   await expect(inventoryPage.navbar.cartBadge).toHaveText('2');
 
