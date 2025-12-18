@@ -5,30 +5,30 @@ import { CartPage } from "../../pages/CartPage";
 import { CheckoutStepOnePage } from "../../pages/CheckoutStepOnePage";
 
 test.beforeEach(async ({ page }) => {
-  const loginPage = new LoginPage(page);
+  const loginPage: LoginPage = new LoginPage(page);
   await loginPage.goTo();
   await loginPage.login('standard_user', 'secret_sauce');
   await expect(page).toHaveURL(/.*inventory.html/);
 
-  const inventoryPage = new InventoryPage(page);
+  const inventoryPage: InventoryPage = new InventoryPage(page);
   await inventoryPage.addItemToCart('Sauce Labs Backpack');
   await inventoryPage.navbar.goToCart();
   await expect(page).toHaveURL(/.*cart.html/);
 
-  const cartPage = new CartPage(page);
+  const cartPage: CartPage = new CartPage(page);
   await cartPage.proceedToCheckout();
   await expect(page).toHaveURL(/.*checkout-step-one.html/);
 });
 
 test('User should be able to cancel checkout', async ({ page }) => {
-  const checkoutStepOnePage = new CheckoutStepOnePage(page);
+  const checkoutStepOnePage: CheckoutStepOnePage = new CheckoutStepOnePage(page);
   await checkoutStepOnePage.cancelCheckout();
   await expect(page).toHaveURL(/.*cart.html/);
   await expect(page.locator('.title')).toHaveText('Your Cart');
 });
 
 test('User should be able to proceed to checkout', async ({ page }) => {
-  const checkoutStepOnePage = new CheckoutStepOnePage(page);
+  const checkoutStepOnePage: CheckoutStepOnePage = new CheckoutStepOnePage(page);
   await checkoutStepOnePage.proceedToCheckout('fadida', 'junaedy', "13740");
   await expect(page).toHaveURL(/.*checkout-step-two.html/);
   await expect(page.locator('.title')).toHaveText('Checkout: Overview');

@@ -4,32 +4,32 @@ import { InventoryPage } from "../../pages/InventoryPage";
 import { CartPage } from "../../pages/CartPage";
 
 test.beforeEach(async ({ page }) => {
-  const loginPage = new LoginPage(page);
+  const loginPage: LoginPage = new LoginPage(page);
   await loginPage.goTo();
   await loginPage.login('standard_user', 'secret_sauce');
   await expect(page).toHaveURL(/.*inventory.html/);
 
-  const inventoryPage = new InventoryPage(page);
+  const inventoryPage: InventoryPage = new InventoryPage(page);
   await inventoryPage.addItemToCart('Sauce Labs Backpack');
   await inventoryPage.navbar.goToCart();
   await expect(page).toHaveURL(/.*cart.html/);
 });
 
 test('User should be able to remove item to cart', async ({ page }) => {
-  const cartPage = new CartPage(page);
+  const cartPage: CartPage = new CartPage(page);
   await cartPage.removeItemFromCart('Sauce Labs Backpack');
   await expect(page.locator('.cart-item')).toBeHidden();
 });
 
 test('User should be able to continue shopping', async ({ page }) => {
-  const cartPage = new CartPage(page);
+  const cartPage: CartPage = new CartPage(page);
   await cartPage.continueShopping();
   await expect(page).toHaveURL(/.*inventory.html/);
   await expect(page.locator('.title')).toHaveText('Products');
 });
 
 test('User should be able to proceed to checkout', async ({ page }) => {
-  const cartPage = new CartPage(page);
+  const cartPage: CartPage = new CartPage(page);
   await cartPage.proceedToCheckout();
   await expect(page).toHaveURL(/.*checkout-step-one.html/);
   await expect(page.locator('.title')).toContainText('Checkout');

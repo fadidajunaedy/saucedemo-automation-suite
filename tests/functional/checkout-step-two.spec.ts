@@ -34,9 +34,9 @@ test('User should be able to cancel checkout', async ({ page }) => {
 
 test('User should be able to finish to checkout', async ({ page }) => {
   const checkoutStepTwoPage = new CheckoutStepTwoPage(page);
-  const subTotal = await checkoutStepTwoPage.getSubTotal();
-  const tax = await checkoutStepTwoPage.getTax();
-  const total = await checkoutStepTwoPage.getTotal();
+  const subTotal: number = await checkoutStepTwoPage.getSubTotal();
+  const tax: number = await checkoutStepTwoPage.getTax();
+  const total:number = await checkoutStepTwoPage.getTotal();
   expect(subTotal + tax).toEqual(total);
 
   await checkoutStepTwoPage.finishCheckout();
